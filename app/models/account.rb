@@ -1,3 +1,3 @@
 class Account < ApplicationRecord
-  validate code: :presence
+  validates :code, presence: true
 end

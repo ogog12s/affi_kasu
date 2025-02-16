@@ -1,3 +1,3 @@
 class Affiliate < ApplicationRecord
-  validate link: :presence
+  validates :link, presence: true
 end
