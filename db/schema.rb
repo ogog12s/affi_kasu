@@ -21,26 +21,32 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_16_121438) do
     t.index ["code"], name: "index_accounts_on_code", unique: true
   end
 
+  create_table "affiliates", force: :cascade do |t|
+    t.string "name"
+    t.string "link", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.bigint "post_id"
+    t.bigint "affiliate_id"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["post_id"], name: "index_posts_on_post_id"
+    t.index ["affiliate_id"], name: "index_posts_on_affiliate_id"
   end
 
   create_table "videos", force: :cascade do |t|
-    t.bigint "post_id", null: false
+    t.bigint "affiliate_id", null: false
     t.string "downloaded_path"
-    t.string "affiliate_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_videos_on_post_id"
+    t.index ["affiliate_id"], name: "index_videos_on_affiliate_id"
   end
 
   add_foreign_key "posts", "accounts"
-  add_foreign_key "posts", "posts"
-  add_foreign_key "videos", "posts"
+  add_foreign_key "posts", "affiliates"
+  add_foreign_key "videos", "affiliates"
 end
