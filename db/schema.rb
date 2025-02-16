@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_16_121438) do
 
   create_table "videos", force: :cascade do |t|
     t.bigint "affiliate_id", null: false
+    t.string "title"
+    t.text "description"
     t.string "downloaded_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
